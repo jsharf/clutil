@@ -1,13 +1,13 @@
 cc_library(
     name = "util",
-    visibility = ["//opencl"],
-    hdrs = ["util.h"],
+    visibility = ["//clutil"],
+    hdrs = ["util.h"] + glob(["CL/*"]),
     deps = [],
 )
 
 cc_binary(
     name = "cltest",
-    visibility = ["//opencl"],
+    visibility = ["//clutil"],
     srcs = ["cltest.cc"],
     copts = [
       "--std=c++1z",
@@ -21,17 +21,17 @@ cc_binary(
 )
 
 package_group(
-    name = "opencl",
+    name = "clutil",
     packages = [
-        "//opencl/...",
+        "//clutil/...",
     ],
     includes = [
-        ":opencl_users",
+        ":clutil_users",
     ],
 )
 
 package_group(
-    name = "opencl_users",
+    name = "clutil_users",
     packages = [
         "//math/..."
     ],

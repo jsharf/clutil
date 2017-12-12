@@ -1,13 +1,11 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#ifdef __APPLE__
-#include <OpenCL/cl.hpp>
-#else
-#include <CL/cl.hpp>
-#endif
+#include "clutil/CL/cl.hpp"
 
+#include <iostream>
 #include <string>
+#include <tuple>
 #include <vector>
 
 namespace clutil {
@@ -15,7 +13,7 @@ namespace clutil {
 std::vector<cl::Platform> GetPlatforms() {
   std::vector<cl::Platform> all_platforms;
   cl::Platform::get(&all_platforms);
-  if (platforms.size() == 0) {
+  if (all_platforms.size() == 0) {
     std::cerr << "No platforms found. Check OpenCL Installation." << std::endl;
     std::exit(1);
   }
@@ -34,8 +32,8 @@ cl::Platform GetDefaultPlatform() {
 
 std::vector<cl::Device> GetPlatformDevices(const cl::Platform& platform) {
   std::vector<cl::Device> devices;
-  platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
-  if (all_devices.size() == 0) {
+  platform.getDevices(CL_DEVICE_TYPE_ALL, &devices);
+  if (devices.size() == 0) {
     std::cout << " No devices found. Check OpenCL installation!\n";
     exit(1);
   }
@@ -55,7 +53,7 @@ std::tuple<cl::Context, cl::Program> Compile(
   cl::Program program(context, sources);
   if (program.build({device}) != CL_SUCCESS) {
     std::cout << "Error building: "
-              << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(default_device)
+              << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device)
               << std::endl;
     std::exit(1);
   }

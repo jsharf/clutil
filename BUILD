@@ -5,6 +5,20 @@ cc_library(
     deps = [],
 )
 
+config_setting(
+    name = "linux",
+    constraint_values = [
+      "@bazel_tools//platforms:linux",
+    ],
+)
+
+config_setting(
+    name = "osx",
+    constraint_values = [
+      "@bazel_tools//platforms:osx",
+    ],
+)
+
 cc_binary(
     name = "cltest",
     visibility = ["//clutil"],
@@ -12,9 +26,11 @@ cc_binary(
     copts = [
       "--std=c++1z",
     ],
-    linkopts = [
-        "-lOpenCL",
-    ],
+    linkopts = select({
+        ":osx" : ["-framework OpenCL"],
+        ":linux" : ["-lOpenCL"],
+        "//conditions:default" : ["-lOpenCL"],
+    }),
     deps = [
         ":util",
     ],

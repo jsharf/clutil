@@ -7,6 +7,7 @@ cc_library(
 
 config_setting(
     name = "linux",
+    visibility = ["//clutil"],
     constraint_values = [
       "@bazel_tools//platforms:linux",
     ],
@@ -14,6 +15,7 @@ config_setting(
 
 config_setting(
     name = "osx",
+    visibility = ["//clutil"],
     constraint_values = [
       "@bazel_tools//platforms:osx",
     ],

@@ -5,6 +5,7 @@
 //  countermeasure.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic ignored "-Wignored-attributes"
 #include "clutil/CL/cl.hpp"
 #pragma GCC diagnostic pop
 

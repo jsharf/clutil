@@ -2,6 +2,7 @@ cc_library(
     name = "util",
     visibility = ["//clutil"],
     hdrs = ["util.h"] + glob(["CL/*"]),
+    srcs = ["util.cc"],
     deps = [],
 )
 
@@ -30,8 +31,8 @@ cc_binary(
     ],
     linkopts = select({
         ":osx" : ["-framework OpenCL"],
-        ":linux" : ["-lOpenCL"],
-        "//conditions:default" : ["-lOpenCL"],
+        ":linux" : ["-lOpenCL", "-L/usr/local/cuda-8.0/targets/x86_64-linux/lib"],
+        "//conditions:default" : ["-lOpenCL", "-L/usr/local/cuda-8.0/targets/x86_64-linux/lib"],
     }),
     deps = [
         ":util",

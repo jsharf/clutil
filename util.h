@@ -4,6 +4,7 @@
 //  Unfortunately opencl injects annoying warnings, so this is a temporary
 //  countermeasure.
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpragmas"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #pragma GCC diagnostic ignored "-Wignored-attributes"
 #include "clutil/CL/cl.hpp"

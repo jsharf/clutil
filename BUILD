@@ -1,6 +1,6 @@
 cc_library(
     name = "util",
-    visibility = ["//clutil"],
+    visibility = ["//visibility:public"],
     hdrs = ["util.h"] + glob(["CL/*"]),
     srcs = ["util.cc"],
     deps = [],
@@ -8,7 +8,7 @@ cc_library(
 
 config_setting(
     name = "linux",
-    visibility = ["//clutil"],
+    visibility = ["//visibility:public"],
     constraint_values = [
       "@bazel_tools//platforms:linux",
     ],
@@ -16,7 +16,7 @@ config_setting(
 
 config_setting(
     name = "osx",
-    visibility = ["//clutil"],
+    visibility = ["//visibility:public"],
     constraint_values = [
       "@bazel_tools//platforms:osx",
     ],
@@ -24,7 +24,7 @@ config_setting(
 
 cc_binary(
     name = "cltest",
-    visibility = ["//clutil"],
+    visibility = ["//visibility:private"],
     srcs = ["cltest.cc"],
     copts = [
       "--std=c++1z",
@@ -37,22 +37,4 @@ cc_binary(
     deps = [
         ":util",
     ],
-)
-
-package_group(
-    name = "clutil",
-    packages = [
-        "//clutil/...",
-    ],
-    includes = [
-        ":clutil_users",
-    ],
-)
-
-package_group(
-    name = "clutil_users",
-    packages = [
-        "//math/..."
-    ],
-    includes = [],
 )

@@ -7,7 +7,7 @@
 #pragma GCC diagnostic ignored "-Wpragmas"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #pragma GCC diagnostic ignored "-Wignored-attributes"
-#include "clutil/CL/cl.hpp"
+#include "CL/cl.hpp"
 #pragma GCC diagnostic pop
 
 #include <iostream>

@@ -87,11 +87,14 @@ int main() {
   // read result from GPU to here
   queue.enqueueReadBuffer(buffer_C, CL_TRUE, 0, sizeof(int) * n, C);
 
-  std::cout << "result: {";
+  // Now do the same calculation on the CPU.
+  std::cout << "Cross-verifying CPU and GPU vector sum..." << std::endl;
   for (int i = 0; i < n; i++) {
-    std::cout << C[i] << " ";
+    if (C[i] != A[i] + B[i]) {
+      std::cout << "Failed @ C[" << i << "]. " << C[i] << " != " << A[i] << " + " << B[i] << "!";
+      return 1;
+    }
   }
-  std::cout << "}" << std::endl;
-
+  std::cout << "Cross-verified. PASS." << std::endl;
   return 0;
 }

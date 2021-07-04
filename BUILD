@@ -38,3 +38,10 @@ cc_binary(
         ":util",
     ],
 )
+
+package_group(
+    name = "clutil",
+    packages = [
+        "//clutil/...",
+    ],
+)

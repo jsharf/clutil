@@ -1,6 +1,7 @@
 cc_library(
     name = "util",
     visibility = ["//visibility:public"],
+    defines = ["CL_TARGET_OPENCL_VERSION=220"],
     hdrs = ["util.h"] + glob(["CL/*"]),
     srcs = ["util.cc"],
     deps = [],
